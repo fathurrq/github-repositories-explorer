@@ -2,6 +2,10 @@
 
 This project is a small Next.js application that allows searching for GitHub users and exploring their repositories. It demonstrates both client side and server side rendering.
 
+## Demo URL
+
+https://github-repositories-explorer-tau.vercel.app
+
 ## Features
 
 - Search for up to five GitHub users by name.
