@@ -26,8 +26,12 @@ export default function UserItem({ user }: Props) {
         if (!res.ok) throw new Error("Failed to fetch repos");
         const data = await res.json();
         setRepos(data);
-      } catch (e: any) {
-        setError(e.message);
+      } catch (e) {
+        if (e instanceof Error) {
+          setError(e.message);
+        } else {
+          setError('An unexpected error occurred');
+        }
       } finally {
         setLoading(false);
       }

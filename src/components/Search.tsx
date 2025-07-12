@@ -25,7 +25,7 @@ export default function Search() {
           Search
         </button>
       </form>
-      {query && <p className="text-sm">Showing users for "{query}"</p>}
+      {query && <p className="text-sm">Showing users for “{query}”</p>}
       {loading && <p>Loading...</p>}
       {error && <p className="text-red-600">{error}</p>}
       <div className="space-y-2">

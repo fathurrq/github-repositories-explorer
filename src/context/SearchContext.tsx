@@ -27,7 +27,11 @@ interface ProviderProps {
   children: ReactNode;
 }
 
-export function SearchProvider({ initialQuery = "", initialUsers = [], children }: ProviderProps) {
+export function SearchProvider({
+  initialQuery = "",
+  initialUsers = [],
+  children,
+}: ProviderProps) {
   const [query, setQuery] = useState(initialQuery);
   const [users, setUsers] = useState<GitHubUser[]>(initialUsers);
   const [loading, setLoading] = useState(false);
@@ -42,19 +46,29 @@ export function SearchProvider({ initialQuery = "", initialUsers = [], children 
         setUsers([]);
         return;
       }
-      const res = await fetch(`https://api.github.com/search/users?q=${encodeURIComponent(q)}&per_page=5`);
+      const res = await fetch(
+        `https://api.github.com/search/users?q=${encodeURIComponent(
+          q
+        )}&per_page=5`
+      );
       if (!res.ok) throw new Error("Failed to fetch users");
       const data = await res.json();
       setUsers(data.items ?? []);
-    } catch (e: any) {
-      setError(e.message);
+    } catch (e) {
+      if (e instanceof Error) {
+        setError(e.message);
+      } else {
+        setError("An unexpected error occurred");
+      }
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <SearchContext.Provider value={{ query, users, loading, error, searchUsers }}>
+    <SearchContext.Provider
+      value={{ query, users, loading, error, searchUsers }}
+    >
       {children}
     </SearchContext.Provider>
   );

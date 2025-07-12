@@ -5,7 +5,7 @@ beforeEach(() => {
   global.fetch = jest.fn().mockResolvedValue({
     ok: true,
     json: async () => [{ id: 1, name: 'repo', description: 'desc', stargazers_count: 1 }],
-  }) as any;
+  }) as jest.MockedFunction<typeof fetch>;
 });
 
 afterEach(() => {

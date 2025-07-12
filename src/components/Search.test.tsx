@@ -6,7 +6,7 @@ beforeEach(() => {
   global.fetch = jest.fn().mockResolvedValue({
     ok: true,
     json: async () => ({ items: [{ login: 'john' }] }),
-  }) as any;
+  }) as jest.MockedFunction<typeof fetch>
 });
 
 afterEach(() => {
